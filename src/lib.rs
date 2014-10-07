@@ -1,8 +1,36 @@
 #![crate_type="lib"]
 #![crate_name="pushover"]
 
+extern crate http;
+extern crate url;
+
+use http::client::RequestWriter;
+use http::method::Post;
+use url::Url;
+
 pub mod priority;
 pub mod message;
+
+pub fn simple_send_message(message: message::Message) -> bool
+{
+    let post_data = generate_request_data(message);
+    let url = Url::parse("https://api.pushover.net/a/messages.json").unwrap();
+
+    let mut request: RequestWriter = match RequestWriter::new(Post, url) {
+    Ok(request) => request,
+    _ => return false,
+    };
+
+    request.headers.content_length = Some(post_data.len());
+    let _ = request.write(post_data.as_bytes());
+
+    let _ = match request.read_response() {
+        Ok(response) => response,
+        _ => return false,
+    };
+
+    return true;
+}
 
 fn generate_request_part(key: String, value: String) -> String
 {
