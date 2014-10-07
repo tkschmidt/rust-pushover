@@ -6,3 +6,4 @@ A rust crate for sending messages via the [Pushover.net](https://pushover.net/) 
 Building
 ----------
 Just use ```cargo build``` to build. There is also a test suit available with ```cargo test```
+[![Build Status](https://travis-ci.org/EdBrereton/rust-pushover.svg?branch=master)](https://travis-ci.org/EdBrereton/rust-pushover)
