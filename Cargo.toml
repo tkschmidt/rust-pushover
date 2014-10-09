@@ -7,4 +7,3 @@ authors = ["Ed Brereton <edbrereton@gmail.com>"]
 [dependencies.http]
 
 git = "https://github.com/chris-morgan/rust-http.git"
-rev = "5c376e1484ea39ac7911f89952d38af78c25b400"
