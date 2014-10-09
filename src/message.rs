@@ -16,3 +16,4 @@ pub struct Message
     pub expire: Option<int>,
     pub callback: Option<Url>,
 }
+

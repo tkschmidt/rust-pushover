@@ -32,6 +32,8 @@ pub fn simple_send_message(message: message::Message) -> bool
     return true;
 }
 
+//pub fn send_message(message: message::Message) -> 
+
 fn generate_request_part(key: String, value: String) -> String
 {
     let mut data = String::from_str("&");
