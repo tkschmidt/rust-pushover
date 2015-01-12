@@ -32,7 +32,7 @@ pub fn simple_send_message(message: message::Message) -> bool
     return true;
 }
 
-//pub fn send_message(message: message::Message) -> 
+//pub fn send_message(message: message::Message) ->
 
 fn generate_request_part(key: String, value: String) -> String
 {
@@ -150,7 +150,7 @@ mod test {
             token: String::from_str("token_val"),
             title: Some(String::from_str("title_val")),
             device: Some(String::from_str("device_val")),
-            priority: Some(priority::Normal),
+            priority: Some(priority::Priority::Normal),
             retry: Some(30),
             expire: Some(300),
             callback: None};

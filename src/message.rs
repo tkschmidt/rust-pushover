@@ -12,8 +12,8 @@ pub struct Message
     pub device: Option<String>,
 
     pub priority: Option<Priority>,
-    pub retry: Option<int>,
-    pub expire: Option<int>,
+    pub retry: Option<i32>,
+    pub expire: Option<i32>,
     pub callback: Option<Url>,
 }
 
