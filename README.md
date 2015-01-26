@@ -1,6 +1,9 @@
 rust-pushover
 =============
 
+CURRENTLY NON-FUNCTIONAL
+I'm in the process of updating for Rust v1.0, and changing the http library that is used from rust-http to hyper. Once done, hopefully it will be back up and running.
+
 
 [![Build Status](https://travis-ci.org/EdBrereton/rust-pushover.svg?branch=master)](https://travis-ci.org/EdBrereton/rust-pushover)
 
