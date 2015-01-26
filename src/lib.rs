@@ -42,9 +42,9 @@ fn generate_request_part(key: &str, value: &str) -> String
 fn generate_request_data(message: message::Message) -> String
 {
     let mut data = format!("token={tok}&user={usr}&message={msg}",
-                          tok = message.token.as_slice(),
-                           usr = message.user.as_slice(),
-                           msg = message.message.as_slice());
+                          tok = message.token,
+                           usr = message.user,
+                           msg = message.message);
 
     match message.title {
         Some(value) =>
