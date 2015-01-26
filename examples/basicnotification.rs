@@ -4,9 +4,9 @@ use pushover::message::Message;
 
 fn main()
 {
-    let token = String::from_str("aYAtEHZm1obaiV8MbXFDRpW44jRUxx");
-    let user = String::from_str("uVED84FSEzbcgHhxQgoQXFZufC1idQ");
-    let msg = String::from_str("This is a test message");
+    let token = "aYAtEHZm1obaiV8MbXFDRpW44jRUxx";
+    let user = "uVED84FSEzbcgHhxQgoQXFZufC1idQ";
+    let msg = "This is a test message";
 
     let message = Message{
         message: msg,

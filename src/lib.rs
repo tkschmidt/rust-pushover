@@ -1,62 +1,55 @@
 #![crate_type="lib"]
 #![crate_name="pushover"]
 
-extern crate http;
-extern crate url;
+//extern crate http;
+//extern crate url;
 
-use http::client::RequestWriter;
-use http::method::Post;
-use url::Url;
+//use http::client::RequestWriter;
+//use http::method::Post;
+//use url::Url;
 
 pub mod priority;
 pub mod message;
 
 pub fn simple_send_message(message: message::Message) -> bool
 {
-    let post_data = generate_request_data(message);
-    let url = Url::parse("https://api.pushover.net/a/messages.json").unwrap();
+//    let post_data = generate_request_data(message);
+//    let url = Url::parse("https://api.pushover.net/a/messages.json").unwrap();
 
-    let mut request: RequestWriter = match RequestWriter::new(Post, url) {
-    Ok(request) => request,
-    _ => return false,
-    };
+//    let mut request: RequestWriter = match RequestWriter::new(Post, url) {
+//    Ok(request) => request,
+//    _ => return false,
+//    };
 
-    request.headers.content_length = Some(post_data.len());
-    let _ = request.write(post_data.as_bytes());
+//    request.headers.content_length = Some(post_data.len());
+//    let _ = request.write(post_data.as_bytes());
 
-    let _ = match request.read_response() {
-        Ok(response) => response,
-        _ => return false,
-    };
+//    let _ = match request.read_response() {
+//        Ok(response) => response,
+//        _ => return false,
+//    };
 
     return true;
 }
 
 //pub fn send_message(message: message::Message) ->
 
-fn generate_request_part(key: String, value: String) -> String
+fn generate_request_part(key: &str, value: &str) -> String
 {
-    let mut data = String::from_str("&");
-    data.push_str(key.as_slice());
-    data.push_str("=");
-    data.push_str(value.as_slice());
-
-    return data;
+    return format!("&{key}={value}", key=key, value=value);
 }
 
 fn generate_request_data(message: message::Message) -> String
 {
-    let mut data = String::from_str("token=");
-    data.push_str(message.token.as_slice());
-    data.push_str("&user=");
-    data.push_str(message.user.as_slice());
-    data.push_str("&message=");
-    data.push_str(message.message.as_slice());
+    let mut data = format!("token={tok}&user={usr}&message={msg}",
+                          tok = message.token.as_slice(),
+                           usr = message.user.as_slice(),
+                           msg = message.message.as_slice());
 
     match message.title {
         Some(value) =>
         {
-            let title = generate_request_part(String::from_str("title"), value);
+            let title = generate_request_part("title", value);
             data.push_str(title.as_slice());
         },
         None => (),
@@ -65,7 +58,7 @@ fn generate_request_data(message: message::Message) -> String
     match message.device {
         Some(value) =>
         {
-            let device = generate_request_part(String::from_str("device"), value);
+            let device = generate_request_part("device", value);
             data.push_str(device.as_slice());
         },
         None => (),
@@ -74,7 +67,7 @@ fn generate_request_data(message: message::Message) -> String
     match message.priority {
         Some(value) =>
         {
-            let priority = generate_request_part(String::from_str("priority"), value.stringify());
+            let priority = generate_request_part("priority", value.stringify());
             data.push_str(priority.as_slice());
         },
         None => (),
@@ -83,7 +76,7 @@ fn generate_request_data(message: message::Message) -> String
     match message.retry {
         Some(value) =>
         {
-            let retry = generate_request_part(String::from_str("retry"), value.to_string());
+            let retry = generate_request_part("retry", value.to_string().as_slice());
             data.push_str(retry.as_slice());
         },
         None => (),
@@ -92,7 +85,7 @@ fn generate_request_data(message: message::Message) -> String
     match message.expire {
         Some(value) =>
         {
-            let expire = generate_request_part(String::from_str("expire"), value.to_string());
+            let expire = generate_request_part("expire", value.to_string().as_slice());
             data.push_str(expire.as_slice());
         },
         None => (),
@@ -116,8 +109,8 @@ mod test {
 #[test]
     fn test_generate_request_part()
     {
-        let key = String::from_str("key");
-        let value = String::from_str("value");
+        let key = "key";
+        let value = "value";
         let result = generate_request_part(key, value);
         assert_eq!("&key=value", result.as_slice())
     }
@@ -126,9 +119,9 @@ mod test {
     fn test_generate_minimal_message()
     {
         let test_message = message::Message{
-            message: String::from_str("message_val"),
-            user: String::from_str("user_val"),
-            token: String::from_str("token_val"),
+            message: "message_val",
+            user: "user_val",
+            token: "token_val",
             title: None,
             device: None,
             priority: None,
@@ -145,11 +138,11 @@ mod test {
     fn test_generate_full_message()
     {
         let test_message = message::Message{
-            message: String::from_str("message_val"),
-            user: String::from_str("user_val"),
-            token: String::from_str("token_val"),
-            title: Some(String::from_str("title_val")),
-            device: Some(String::from_str("device_val")),
+            message: "message_val",
+            user: "user_val",
+            token: "token_val",
+            title: Some("title_val"),
+            device: Some("device_val"),
             priority: Some(priority::Priority::Normal),
             retry: Some(30),
             expire: Some(300),

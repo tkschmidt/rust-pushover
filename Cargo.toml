@@ -4,10 +4,6 @@ name = "pushover"
 version = "0.0.1"
 authors = ["Ed Brereton <edbrereton@gmail.com>"]
 
-[dependencies.http]
-
-git = "https://github.com/chris-morgan/rust-http.git"
-
 [[example]]
 name = "basicnotification"
 path = "examples/basicnotification.rs"

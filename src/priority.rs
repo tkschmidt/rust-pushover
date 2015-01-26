@@ -9,13 +9,13 @@ pub enum Priority
 }
 
 impl Priority {
-    pub fn stringify(&self) -> String {
+    pub fn stringify(&self) -> &'static str {
         return match *self{
-            Priority::Lowest => "-2".to_string(),
-            Priority::Low => "-1".to_string(),
-            Priority::Normal => "0".to_string(),
-            Priority::High => "1".to_string(),
-            Priority::Emergency => "2".to_string(),
+            Priority::Lowest => "-2",
+            Priority::Low => "-1",
+            Priority::Normal => "0",
+            Priority::High => "1",
+            Priority::Emergency => "2",
         };
     }
 }
